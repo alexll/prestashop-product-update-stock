@@ -98,7 +98,8 @@ class product_update_stock extends Module {
 				
 				$defaultAttribute = Product::getDefaultAttribute($id_product);
 				
-				if(StockAvailable::getQuantityAvailableByProduct($id_product, $defaultAttribute) <=0){
+				//If $id_defaultAttribute is a "real" default and has stock
+				if( !$defaultCombination->default_on || StockAvailable::getQuantityAvailableByProduct($id_product, $defaultAttribute) <=0){
 					//Update to remove default combination
 					$oldDefaultCombination = new Combination($defaultAttribute);
 					
